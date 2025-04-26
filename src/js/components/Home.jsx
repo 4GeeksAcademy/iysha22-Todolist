@@ -1,5 +1,5 @@
 import React from "react";
-
+import ListaTareas from "./ListaTareas";
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 

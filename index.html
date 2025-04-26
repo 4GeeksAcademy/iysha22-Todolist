@@ -1,13 +1,92 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/4geeks.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello Rigo with Vanilla.js</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/js/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full height */
+            margin: 0; /* Remove margins */
+        }
+        .container {
+            background-color: white; /* White background for the container */
+            padding: 20px; /* Internal spacing */
+            border-radius: 8px; /* Rounded borders */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow */
+            width: 300px; /* Fixed width */
+            text-align: center; /* Center text */
+        }
+        #todo-form {
+            margin-bottom: 20px;
+        }
+        #todo-list {
+            list-style: none; /* Remove bullet points */
+            padding: 0; /* Remove padding */
+        }
+        li {
+            padding: 10px; /* Padding for each list item */
+            border: 1px solid #ccc; /* Border for list items */
+            margin-bottom: 5px; /* Space between items */
+            position: relative; /* Position for delete button */
+            text-align: left; /* Align text to the left */
+        }
+        .delete-btn {
+            position: absolute; /* Positioning */
+            right: 10px; /* Right alignment */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust for center */
+            background-color: red; /* Button color */
+            color: white; /* Text color */
+            border: none; /* No border */
+            cursor: pointer; /* Cursor style */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>¿Qué se necesita hacer?</h1>
+        <div id="todo-form">
+            <input type="text" id="new-task" placeholder="Añadir nueva tarea">
+            <button id="add-btn">Añadir</button>
+        </div>
+        <ul id="todo-list">
+            <!-- Tareas se añadirán aquí -->
+        </ul>
+    </div>
+
+    <script>
+        const addButton = document.getElementById('add-btn');
+        const todoList = document.getElementById('todo-list');
+        const newTaskInput = document.getElementById('new-task');
+
+        addButton.addEventListener('click', function() {
+            const taskText = newTaskInput.value;
+            if (taskText) {
+                const li = document.createElement('li');
+                li.textContent = taskText;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.classList.add('delete-btn');
+
+                deleteButton.addEventListener('click', function() {
+                    todoList.removeChild(li);
+                });
+
+                li.appendChild(deleteButton);
+                todoList.appendChild(li);
+                newTaskInput.value = ''; // Clear the input
+            }
+        });
+    </script>
+
+</body>
 </html>
